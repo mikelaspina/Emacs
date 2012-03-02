@@ -15,6 +15,7 @@
 
 ;(menu-bar-mode -1)
 (tool-bar-mode -1)
+(scroll-bar-mode -1)
 
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)

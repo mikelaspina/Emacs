@@ -92,7 +92,6 @@ in place if it is inside the meat of the line"
 	(save-excursion (indent-line-to amount))
       (indent-line-to amount))))
 
-
 ;; Taken from <http://www.manning.com/payette/AppCexcerpt.pdf> which seems the
 ;; closest to a grammar definition for powershell. It is not complete, and
 ;; contains some inaccuracies (e.g. it says that variables match \$[:alnum:]+,
@@ -118,7 +117,7 @@ in place if it is inside the meat of the line"
 
 (defvar powershell-scope-names
   (regexp-opt
-  '("env" "function" "global" "local" "private" "script" "variable"))
+   '("env" "function" "global" "local" "private" "script" "variable"))
   "Names of scopes in Powershell mode.")
 
 ;; Taken from Get-Variable on a fresh shell, merged with man
@@ -176,7 +175,6 @@ differently from the other variables.")
      ("\\.\\([[:alnum:]_.]+\\)\\>\\s *[^(]" 1 font-lock-variable-name-face)))
   "Keywords for the maximum level of font-locking in Powershell mode.")
 
-
 (defvar powershell-mode-syntax-table (make-syntax-table)
   "Syntax table for Powershell mode")
 
@@ -188,7 +186,6 @@ differently from the other variables.")
 (modify-syntax-entry ?- "w" powershell-mode-syntax-table)
 (modify-syntax-entry ?' "\"" powershell-mode-syntax-table)
 
-
 (defvar powershell-imenu-expression
   `(("Functions" "function \\(\\w+\\)" 1)
     ("Top variables" ,(concat "^\\$\\(" powershell-scope-names "\\)?:?"
@@ -214,7 +211,6 @@ differently from the other variables.")
       (cons '("At \\(.*\\):\\([0-9]+\\) char:\\([0-9]+\\)" 1 2)
 	    compilation-error-regexp-alist))
 
-
 ;; the hook is automatically run by derived-mode
 (defvar powershell-mode-hook '(imenu-add-menubar-index)
   "Hook run after the initialization of Powershell mode.")

@@ -7,6 +7,7 @@
 (defvar my-emacs-root "~/.emacs.d/")
 
 ;; Setup custom load paths
+(add-to-list 'load-path (concat my-emacs-root "lisp"))
 (add-to-list 'load-path (concat my-emacs-root "site-lisp"))
 
 ;;;
@@ -38,7 +39,7 @@
 ;;;
 
 (when (eq system-type 'darwin)
-  (load-file (concat my-emacs-root "osx.el")))
+  (load-library "osx.el"))
 
 (when (eq system-type 'windows-nt)
-  (load-file (concat my-emacs-root "windows.el")))
+  (load-library "windows.el"))

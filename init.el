@@ -22,6 +22,7 @@
 (put 'upcase-region 'disabled nil)
 
 (global-font-lock-mode t)
+(setq font-lock-maximum-decoration t)
 
 (setq column-number-mode t)
 (setq delete-by-moving-to-trash t)

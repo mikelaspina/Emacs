@@ -37,6 +37,14 @@
 (add-hook 'comint-mode-hook 'my-comint-init)
 
 ;;;
+;;; Shell Mode
+;;;
+
+(defun my-shell-mode-hook ()
+  (setq sh-basic-offset 2))
+(add-hook 'sh-mode-hook 'my-shell-mode-hook)
+
+;;;
 ;;; Powershell Mode
 ;;;
 

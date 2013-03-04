@@ -31,22 +31,40 @@
 (require 'cl)
 
 (defvar msl-emacs-root (expand-file-name "~/.emacs.d/"))
-(defvar msl-personal-dir (concat msl-emacs-root "personal"))
-(defvar msl-snippets-dir (concat msl-emacs-root "snippets"))
-(defvar msl-themes-dir (concat msl-emacs-root "themes"))
-(defvar msl-vendor-dir (concat msl-emacs-root "vendor"))
+
+(labels ((expand-dir-name (dirname)
+			  (file-name-as-directory (concat msl-emacs-root dirname))))
+  (defvar msl-backup-dir (expand-dir-name "backup"))
+  (defvar msl-personal-dir (expand-dir-name "personal"))
+  (defvar msl-snippets-dir (expand-dir-name "snippets"))
+  (defvar msl-themes-dir (expand-dir-name "themes"))
+  (defvar msl-vendor-dir (expand-dir-name "vendor")))
 
 (add-to-list 'load-path msl-personal-dir)
 (add-to-list 'load-path msl-vendor-dir)
 
-;;;
-;;; Global customizations
-;;;
+;; ui customizations
+(setq inhibit-startup-screen t)
+;(when (fboundp 'menu-bar-mode)
+;  (menu-bar-mode -1)
+(when (fboundp 'tool-bar-mode)
+  (tool-bar-mode -1))
+(when (fboundp 'scroll-bar-mode)
+  (scroll-bar-mode -1)
 
-;(menu-bar-mode -1)
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
+;; autosave/backup customizations
+(setq backup-directory-alist
+      `((".*" . ,msl-backup-dir)))
+(setq auto-save-file-name-transforms
+      `((".*" ,msl-backup-dir t)))
+(setq
+ backup-by-copying t     ; don't clobber symlinks
+ delete-old-versions t
+ kept-new-versions 5
+ kept-old-versions 2
+ version-control t)      ; use versioned backups
 
+;; editor customizations
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 
@@ -54,8 +72,8 @@
 (setq font-lock-maximum-decoration t)
 
 (setq column-number-mode t)
+(setq line-number-mode t)
 (setq delete-by-moving-to-trash t)
-(setq inhibit-startup-screen t)
 
 ;;;
 ;;; cominit Mode

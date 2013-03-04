@@ -4,6 +4,7 @@
 ;;
 ;; Author: Mike LaSpina
 ;; URL: http://github.com/mikelaspina/emacs
+;; Version: 1.0.0
 ;; Keywords: convenience
 
 ;; This file is not part of GNU Emacs.

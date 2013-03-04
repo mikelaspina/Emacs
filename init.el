@@ -30,11 +30,14 @@
 
 (require 'cl)
 
-(defvar my-emacs-root "~/.emacs.d/")
+(defvar msl-emacs-root (expand-file-name "~/.emacs.d/"))
+(defvar msl-personal-dir (concat msl-emacs-root "personal"))
+(defvar msl-snippets-dir (concat msl-emacs-root "snippets"))
+(defvar msl-themes-dir (concat msl-emacs-root "themes"))
+(defvar msl-vendor-dir (concat msl-emacs-root "vendor"))
 
-;; Setup custom load paths
-(add-to-list 'load-path (concat my-emacs-root "lisp"))
-(add-to-list 'load-path (concat my-emacs-root "site-lisp"))
+(add-to-list 'load-path msl-personal-dir)
+(add-to-list 'load-path msl-vendor-dir)
 
 ;;;
 ;;; Global customizations

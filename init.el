@@ -30,21 +30,36 @@
 
 (require 'cl)
 
-(defvar msl-emacs-root (expand-file-name "~/.emacs.d/"))
+(unless (boundp 'user-emacs-directory)
+  (defvar user-emacs-directory "~/.emacs.d/"
+    "Directory beneath which additional per-user Emacs-specific files are placed."))
 
-(labels ((expand-dir-name (dirname)
-			  (file-name-as-directory (concat msl-emacs-root dirname))))
-  (defvar msl-backup-dir (expand-dir-name "backup"))
-  (defvar msl-personal-dir (expand-dir-name "personal"))
-  (defvar msl-snippets-dir (expand-dir-name "snippets"))
-  (defvar msl-themes-dir (expand-dir-name "themes"))
-  (defvar msl-vendor-dir (expand-dir-name "vendor")))
+;; load paths
+(labels ((user-dir (name) (concat user-emacs-directory name)))
+  (defvar msl-backups-dir (user-dir "backups"))
+  (defvar msl-personal-dir (user-dir "personal"))
+  (defvar msl-snippets-dir (user-dir "snippets"))
+  (defvar msl-themes-dir (user-dir "themes"))
+  (defvar msl-vendor-dir (user-dir "vendor")))
 
 (add-to-list 'load-path msl-personal-dir)
 (add-to-list 'load-path msl-vendor-dir)
 
+;; add vendor subdirs to load-path
+(let ((default-directory msl-vendor-dir))
+  (normal-top-level-add-to-load-path))
+
+;; packages
+(when (>= emacs-major-version 24)
+  (require 'package)
+  (add-to-list 'package-archives
+	       '("melpa" . "http://melpa.milkbox.net/packages/") t)
+  (package-initialize))
+
 ;; ui customizations
-(setq inhibit-startup-screen t)
+(setq inhibit-startup-screen t
+      visible-bell t)
+
 ;(when (fboundp 'menu-bar-mode)
 ;  (menu-bar-mode -1)
 (when (fboundp 'tool-bar-mode)
@@ -54,26 +69,31 @@
 
 ;; autosave/backup customizations
 (setq backup-directory-alist
-      `((".*" . ,msl-backup-dir)))
+      `((".*" . ,msl-backups-dir)))
 (setq auto-save-file-name-transforms
-      `((".*" ,msl-backup-dir t)))
-(setq
- backup-by-copying t     ; don't clobber symlinks
- delete-old-versions t
- kept-new-versions 5
- kept-old-versions 2
- version-control t)      ; use versioned backups
+      `((".*" ,msl-backups-dir t)))
+(setq backup-by-copying t     ; don't clobber symlinks
+      delete-old-versions t
+      kept-new-versions 5
+      kept-old-versions 2
+      version-control t)      ; use versioned backups
 
 ;; editor customizations
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 
 (global-font-lock-mode t)
-(setq font-lock-maximum-decoration t)
 
-(setq column-number-mode t)
-(setq line-number-mode t)
-(setq delete-by-moving-to-trash t)
+(setq column-number-mode t
+      delete-by-moving-to-trash t
+      font-lock-maximum-decoration t
+      line-number-mode t)
+
+(when (and (display-graphic-p)
+	   (fboundp 'load-theme))
+  (load-theme 'zenburn))
+
+(setq custom-file (concat user-emacs-directory "custom.el"))
 
 ;;;
 ;;; cominit Mode
@@ -119,17 +139,5 @@
 
 (when (eq system-type 'windows-nt)
   (load-library "windows.el"))
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(safe-local-variable-values (quote ((sql-set-product . sqlite)))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
 
 ;;; init.el ends here

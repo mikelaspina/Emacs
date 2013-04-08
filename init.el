@@ -129,44 +129,44 @@ first level of subdirectories of `basedir'."
 
 (add-hook 'c-mode-hook 'msl/c-mode-hook)
 
-;;;
-;;; cominit Mode
-;;;
+;;
+;; cominit-mode customizations
+;;
 
-(defun my-comint-init () 
+(defun msl/comint-mode-hook () 
   (setq comint-process-echoes t)) 
-(add-hook 'comint-mode-hook 'my-comint-init)
+(add-hook 'comint-mode-hook 'msl/comint-mode-hook)
 
-;;;
-;;; Shell Mode
-;;;
+;;
+;; shell-mode customizations
+;;
 
-(defun my-shell-mode-hook ()
+(defun msl/shell-mode-hook ()
   (setq sh-basic-offset 2))
-(add-hook 'sh-mode-hook 'my-shell-mode-hook)
+(add-hook 'sh-mode-hook 'msl/shell-mode-hook)
 
-;;;
-;;; Powershell Mode
-;;;
+;;
+;; powershell-mode customizations
+;;
 
 (autoload 'powershell-mode "powershell-mode" "Mode PowerShell" t)
 (push '("\\.ps[12]?$" . powershell-mode) auto-mode-alist)
 
-;;;
-;;; Go Mode
-;;;
+;;
+;; go-mode customizations
+;;
 
 (require 'go-mode-load)
 (eval-after-load "go"
   '(progn
-     (defun my-go-mode-hook ()
+     (defun msl/go-mode-hook ()
        (add-hook 'before-save-hook #'gofmt-before-save)
        (setq tab-width 2))
-     (add-hook 'go-mode-hook 'my-go-mode-hook)))
+     (add-hook 'go-mode-hook 'msl/go-mode-hook)))
 
-;;;
-;;; System specific customizations
-;;;
+;;
+;; OS specific customizations
+;;
 
 (when (eq system-type 'darwin)
   (load-library "osx.el"))

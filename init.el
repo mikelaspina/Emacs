@@ -65,7 +65,7 @@
 (when (fboundp 'tool-bar-mode)
   (tool-bar-mode -1))
 (when (fboundp 'scroll-bar-mode)
-  (scroll-bar-mode -1)
+  (scroll-bar-mode -1))
 
 ;; autosave/backup customizations
 (setq backup-directory-alist

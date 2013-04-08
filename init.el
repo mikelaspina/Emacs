@@ -35,18 +35,6 @@
     "Directory beneath which additional per-user Emacs-specific files are placed."))
 
 ;; load paths
-(let ((basedir (expand-file-name user-emacs-directory)))
-  (cl-labels ((user-dir (name) (concat basedir name)))
-    (defvar msl-backups-dir (user-dir "backups"))
-    (defvar msl-personal-dir (user-dir "personal"))
-    (defvar msl-snippets-dir (user-dir "snippets"))
-    (defvar msl-themes-dir (user-dir "themes"))
-    (defvar msl-vendor-dir (user-dir "vendor"))))
-
-(add-to-list 'load-path msl-personal-dir)
-(add-to-list 'load-path msl-vendor-dir)
-
-; add vendor subdirs to load-path
 (defun msl/add-subdirs-to-load-path (basedir)
   "Add all top-level subdirectories of `basedir' to `load-path'.
 This function tries to match the behavior of
@@ -64,6 +52,16 @@ first level of subdirectories of `basedir'."
 			      (file-directory-p file)))
 		       (directory-files basedir)))))
 
+(let ((basedir (expand-file-name user-emacs-directory)))
+  (cl-labels ((user-dir (name) (concat basedir name)))
+    (defvar msl-backups-dir (user-dir "backups"))
+    (defvar msl-personal-dir (user-dir "personal"))
+    (defvar msl-snippets-dir (user-dir "snippets"))
+    (defvar msl-themes-dir (user-dir "themes"))
+    (defvar msl-vendor-dir (user-dir "vendor"))))
+
+(add-to-list 'load-path msl-personal-dir)
+(add-to-list 'load-path msl-vendor-dir)
 (msl/add-subdirs-to-load-path msl-vendor-dir)
 
 ;; packages

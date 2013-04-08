@@ -35,19 +35,36 @@
     "Directory beneath which additional per-user Emacs-specific files are placed."))
 
 ;; load paths
-(labels ((user-dir (name) (concat user-emacs-directory name)))
-  (defvar msl-backups-dir (user-dir "backups"))
-  (defvar msl-personal-dir (user-dir "personal"))
-  (defvar msl-snippets-dir (user-dir "snippets"))
-  (defvar msl-themes-dir (user-dir "themes"))
-  (defvar msl-vendor-dir (user-dir "vendor")))
+(let ((basedir (expand-file-name user-emacs-directory)))
+  (cl-labels ((user-dir (name) (concat basedir name)))
+    (defvar msl-backups-dir (user-dir "backups"))
+    (defvar msl-personal-dir (user-dir "personal"))
+    (defvar msl-snippets-dir (user-dir "snippets"))
+    (defvar msl-themes-dir (user-dir "themes"))
+    (defvar msl-vendor-dir (user-dir "vendor"))))
 
 (add-to-list 'load-path msl-personal-dir)
 (add-to-list 'load-path msl-vendor-dir)
 
-;; add vendor subdirs to load-path
-(let ((default-directory msl-vendor-dir))
-  (normal-top-level-add-to-load-path))
+; add vendor subdirs to load-path
+(defun msl/add-subdirs-to-load-path (basedir)
+  "Add all top-level subdirectories of `basedir' to `load-path'.
+This function tries to match the behavior of
+`normal-top-level-add-subdirs-to-load-path' except it only considers the
+first level of subdirectories of `basedir'."
+  (let ((default-directory basedir))
+    (normal-top-level-add-to-load-path
+     (cl-remove-if-not (lambda (file)
+			 ;; Find all subdirs beginning with an alphanumeric character,
+			 ;; but exclude VCS directories.
+			 (and (string-match-p "\\`[[:alnum:]]" file)
+			      (not (member file '("RCS", "CVS", "rcs", "cvs")))
+			      ;; Avoid doing a `stat' when it isn't necessary.
+			      (not (string-match-p "\\.elc?\\'" file))
+			      (file-directory-p file)))
+		       (directory-files basedir)))))
+
+(msl/add-subdirs-to-load-path msl-vendor-dir)
 
 ;; packages
 (when (>= emacs-major-version 24)

@@ -95,6 +95,25 @@
 
 (setq custom-file (concat user-emacs-directory "custom.el"))
 
+;;
+;; cc-mode customizations
+;;
+
+(c-add-style "apache"
+             '((inclass . ++)
+	       (indent-tabs-mode . nil)
+               (defun-block-intro . ++)
+               (statement-block-intro . ++)
+               (substatement . ++)
+               (brace-list-intro . ++)
+               (statement-case-intro . ++)
+               (inextern-lang . 0)))
+
+(defun msl/c-mode-hook ()
+  (c-set-style "apache"))
+
+(add-hook 'c-mode-hook 'msl/c-mode-hook)
+
 ;;;
 ;;; cominit Mode
 ;;;

@@ -77,17 +77,6 @@ first level of subdirectories of `basedir'."
 (setq inhibit-startup-screen t
       visible-bell t)
 
-;; autosave/backup customizations
-(setq backup-directory-alist
-      `((".*" . ,msl-backups-dir)))
-(setq auto-save-file-name-transforms
-      `((".*" ,msl-backups-dir t)))
-(setq backup-by-copying t     ; don't clobber symlinks
-      delete-old-versions t
-      kept-new-versions 5
-      kept-old-versions 2
-      version-control t)      ; use versioned backups
-
 ;; editor customizations
 (defun set-window-width (n)
   "Set the selected window's width."
@@ -122,6 +111,16 @@ first level of subdirectories of `basedir'."
 
 (setq delete-by-moving-to-trash t
       font-lock-maximum-decoration t)
+
+(setq backup-directory-alist
+      `((".*" . ,msl-backups-dir)))
+(setq auto-save-file-name-transforms
+      `((".*" ,msl-backups-dir t)))
+(setq backup-by-copying t     ; don't clobber symlinks
+      delete-old-versions t
+      kept-new-versions 5
+      kept-old-versions 2
+      version-control t)      ; use versioned backups
 
 (setq custom-file (concat msl-personal-dir "custom.el"))
 

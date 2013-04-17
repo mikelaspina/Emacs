@@ -131,15 +131,16 @@ first level of subdirectories of `basedir'."
 (eval-after-load "cc-mode"
   '(progn
      (c-add-style "apache"
-		  '((brace-list-intro . ++)
-		    (defun-block-intro . ++)
-		    (inclass . ++)
-		    (indent-tabs-mode . nil)
-		    (inextern-lang . 0)
-		    (label . 0)
-		    (statement-block-intro . ++)
-		    (statement-case-intro . ++)
-		    (substatement . ++)))
+		  '((c-basic-offset . 4)
+		    (c-offsets-alist . ((brace-list-intro . +)
+					(defun-block-intro . +)
+					(inclass . +)
+					(inextern-lang . 0)
+					(label . 0)
+					(statement-block-intro . +)
+					(statement-case-intro . +)
+					(substatement . +)))
+		    (indent-tabs-mode . nil)))
 
      (defun msl/c-mode-hook ()
        (c-set-style "apache"))

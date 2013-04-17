@@ -146,12 +146,15 @@ first level of subdirectories of `basedir'."
      (add-hook 'c-mode-hook 'msl/c-mode-hook)))
 
 ;;
-;; cominit-mode customizations
+;; comint-mode customizations
 ;;
 
-(defun msl/comint-mode-hook () 
-  (setq comint-process-echoes t)) 
-(add-hook 'comint-mode-hook 'msl/comint-mode-hook)
+(eval-after-load "comint"
+  '(progn
+     (defun msl/comint-mode-hook () 
+       (setq comint-process-echoes t))
+
+     (add-hook 'comint-mode-hook 'msl/comint-mode-hook)))
 
 ;;
 ;; shell-mode customizations

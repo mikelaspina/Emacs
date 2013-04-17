@@ -103,7 +103,7 @@ first level of subdirectories of `basedir'."
 (line-number-mode t)
 
 (scroll-bar-mode -1)
-(toolbar-bar-mode -1)
+(tool-bar-mode -1)
 
 ;;
 ;; editor customizations

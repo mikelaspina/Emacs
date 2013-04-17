@@ -1,3 +1,5 @@
+;;; -*- mode: emacs-lisp; coding: utf-8; fill-column: 78; -*-
+
 ;;; init.el --- Mike LaSpina's dot emacs
 ;;
 ;; Copyright (c) 2012-2013 Mike LaSpina

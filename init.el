@@ -114,12 +114,12 @@ first level of subdirectories of `basedir'."
 (scroll-bar-mode -1)
 (toolbar-bar-mode -1)
 
+;;
+;; editor customizations
+;;
+
 (setq delete-by-moving-to-trash t
       font-lock-maximum-decoration t)
-
-(when (and (display-graphic-p)
-	   (fboundp 'load-theme))
-  (load-theme 'zenburn))
 
 (setq custom-file (concat msl-personal-dir "custom.el"))
 
@@ -196,5 +196,13 @@ first level of subdirectories of `basedir'."
 
 (when (eq system-type 'windows-nt)
   (load-library "windows.el"))
+
+;;
+;; themes
+;;
+
+(when (and (display-graphic-p)
+	   (fboundp 'load-theme))
+  (load-theme 'zenburn))
 
 ;;; init.el ends here

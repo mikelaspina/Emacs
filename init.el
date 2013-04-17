@@ -77,13 +77,6 @@ first level of subdirectories of `basedir'."
 (setq inhibit-startup-screen t
       visible-bell t)
 
-;(when (fboundp 'menu-bar-mode)
-;  (menu-bar-mode -1)
-(when (fboundp 'tool-bar-mode)
-  (tool-bar-mode -1))
-(when (fboundp 'scroll-bar-mode)
-  (scroll-bar-mode -1))
-
 ;; autosave/backup customizations
 (setq backup-directory-alist
       `((".*" . ,msl-backups-dir)))
@@ -110,12 +103,19 @@ first level of subdirectories of `basedir'."
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 
-(global-font-lock-mode t)
+;;
+;; global modes
+;;
 
-(setq column-number-mode t
-      delete-by-moving-to-trash t
-      font-lock-maximum-decoration t
-      line-number-mode t)
+(column-number-mode t)
+(global-font-lock-mode t)
+(ido-mode -1)
+(line-number-mode t)
+(scroll-bar-mode -1)
+(toolbar-bar-mode -1)
+
+(setq delete-by-moving-to-trash t
+      font-lock-maximum-decoration t)
 
 (when (and (display-graphic-p)
 	   (fboundp 'load-theme))

@@ -45,8 +45,8 @@ first level of subdirectories of `basedir'."
   (let ((default-directory basedir))
     (normal-top-level-add-to-load-path
      (cl-remove-if-not (lambda (file)
-			 ;; Find all subdirs beginning with an alphanumeric character,
-			 ;; but exclude VCS directories.
+			 ;; Find all subdirs beginning with an alphanumeric
+			 ;; character, but exclude VCS directories.
 			 (and (string-match-p "\\`[[:alnum:]]" file)
 			      (not (member file '("RCS", "CVS", "rcs", "cvs")))
 			      ;; Avoid doing a `stat' when it isn't necessary.

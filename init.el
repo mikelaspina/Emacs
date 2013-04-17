@@ -105,6 +105,8 @@ first level of subdirectories of `basedir'."
   (interactive)
   (set-window-width 80))
 
+(prefer-coding-system 'utf-8)
+
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 

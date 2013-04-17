@@ -205,6 +205,6 @@ first level of subdirectories of `basedir'."
 
 (when (and (display-graphic-p)
 	   (fboundp 'load-theme))
-  (load-theme 'zenburn))
+  (load-theme 'zenburn t))
 
 ;;; init.el ends here

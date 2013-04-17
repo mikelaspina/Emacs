@@ -157,6 +157,19 @@ first level of subdirectories of `basedir'."
      (add-hook 'comint-mode-hook 'msl/comint-mode-hook)))
 
 ;;
+;; go-mode customizations
+;;
+
+(require 'go-mode-load)
+(eval-after-load "go"
+  '(progn
+     (defun msl/go-mode-hook ()
+       (add-hook 'before-save-hook #'gofmt-before-save)
+       (setq tab-width 2))
+
+     (add-hook 'go-mode-hook 'msl/go-mode-hook)))
+
+;;
 ;; shell-mode customizations
 ;;
 
@@ -170,18 +183,6 @@ first level of subdirectories of `basedir'."
 
 (autoload 'powershell-mode "powershell-mode" "Mode PowerShell" t)
 (push '("\\.ps[12]?$" . powershell-mode) auto-mode-alist)
-
-;;
-;; go-mode customizations
-;;
-
-(require 'go-mode-load)
-(eval-after-load "go"
-  '(progn
-     (defun msl/go-mode-hook ()
-       (add-hook 'before-save-hook #'gofmt-before-save)
-       (setq tab-width 2))
-     (add-hook 'go-mode-hook 'msl/go-mode-hook)))
 
 ;;
 ;; OS specific customizations

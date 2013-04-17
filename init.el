@@ -173,9 +173,12 @@ first level of subdirectories of `basedir'."
 ;; shell-mode customizations
 ;;
 
-(defun msl/shell-mode-hook ()
-  (setq sh-basic-offset 2))
-(add-hook 'sh-mode-hook 'msl/shell-mode-hook)
+(eval-after-load "shell-mode"
+  '(progn
+     (defun msl/shell-mode-hook ()
+       (setq sh-basic-offset 2))
+
+     (add-hook 'sh-mode-hook 'msl/shell-mode-hook)))
 
 ;;
 ;; powershell-mode customizations

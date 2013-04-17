@@ -109,8 +109,10 @@ first level of subdirectories of `basedir'."
 
 (column-number-mode t)
 (global-font-lock-mode t)
-(ido-mode -1)
+(global-hl-mode-hook t)
+(ido-mode t)
 (line-number-mode t)
+
 (scroll-bar-mode -1)
 (toolbar-bar-mode -1)
 

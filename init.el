@@ -53,7 +53,7 @@ first level of subdirectories of `basedir'."
 		       (directory-files basedir)))))
 
 (let ((basedir (expand-file-name user-emacs-directory)))
-  (cl-labels ((user-dir (name) (concat basedir name)))
+  (cl-labels ((user-dir (name) (file-name-as-directory (concat basedir name))))
     (defvar msl-backups-dir (user-dir "backups"))
     (defvar msl-personal-dir (user-dir "personal"))
     (defvar msl-snippets-dir (user-dir "snippets"))
@@ -94,6 +94,15 @@ first level of subdirectories of `basedir'."
       version-control t)      ; use versioned backups
 
 ;; editor customizations
+(defun set-window-width (n)
+  "Set the selected window's width."
+  (adjust-window-trailing-edge (selected-window) (- n (window-width)) t))
+
+(defun set-80-columns ()
+  "Set the selected window to 80 columns."
+  (interactive)
+  (set-window-width 80))
+
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 
@@ -108,7 +117,7 @@ first level of subdirectories of `basedir'."
 	   (fboundp 'load-theme))
   (load-theme 'zenburn))
 
-(setq custom-file (concat user-emacs-directory "custom.el"))
+(setq custom-file (concat msl-personal-dir "custom.el"))
 
 ;;
 ;; cc-mode customizations

@@ -124,6 +124,25 @@ first level of subdirectories of `basedir'."
 
 (setq custom-file (concat msl-personal-dir "custom.el"))
 
+;; ui customizations
+
+(defun msl/increment-default-font-height (delta)
+  "Adjust the default font height by `delta' on every frame. `delta'
+should be a multiple of 10 to match the units used by the :height
+face attribute."
+  (let* ((new-height (+ (face-attribute 'default :height) delta))
+	 (new-point-height (/ new-height 10)))
+    (set-face-attribute 'default nil :height new-height)
+    (message "Default font size is now %d" new-point-height)))
+
+(defun increase-default-font-height ()
+  (interactive)
+  (msl/increment-default-font-height 10))
+
+(defun decrease-default-font-height ()
+  (interactive)
+  (msl/increment-default-font-height -10))
+
 ;;
 ;; cc-mode customizations
 ;;
@@ -203,8 +222,12 @@ first level of subdirectories of `basedir'."
 ;; themes
 ;;
 
-(when (and (display-graphic-p)
-	   (fboundp 'load-theme))
-  (load-theme 'zenburn t))
+(defun msl/safe-load-theme (theme)
+  (when (and (fboundp 'load-theme))
+    (load-theme theme t)))
+
+(when (display-graphic-p)
+  (msl/safe-load-theme 'zenburn)
+  (msl/increment-default-font-height 10))
 
 ;;; init.el ends here

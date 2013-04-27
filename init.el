@@ -161,6 +161,19 @@ face attribute."
 					(substatement . +)))
 		    (indent-tabs-mode . nil)))
 
+     (c-add-style "newrelic"
+		  '((c-basic-offset . 2)
+		    (c-cleanup-list . (brace-else-brace
+			               brace-elseif-brace
+				       space-before-funcall))
+		    (c-hanging-braces-alist . ((substatement-open after)))
+		    (c-offsets-alist . ((arglist-cont-nonempty . +)
+					(case-label . +)
+					(label . 0)
+					(statement-case-open . +)
+					(substatement-open . 0)))
+		    (indent-tabs-mode . nil)))
+
      (defun msl/c-mode-hook ()
        (c-set-style "apache"))
 

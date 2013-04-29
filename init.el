@@ -30,6 +30,11 @@
 
 ;;; Code:
 
+;; hide these immediately
+(setq inhibit-startup-screen t)
+(scroll-bar-mode -1)
+(tool-bar-mode -1)
+
 (require 'cl)
 
 (unless (boundp 'user-emacs-directory)
@@ -73,9 +78,8 @@ first level of subdirectories of `basedir'."
 	       '("melpa" . "http://melpa.milkbox.net/packages/") t)
   (package-initialize))
 
-;; ui customizations
-(setq inhibit-startup-screen t
-      visible-bell t)
+;; minimize annoyances
+(setq visible-bell t)
 
 ;; editor customizations
 (defun set-window-width (n)
@@ -92,30 +96,25 @@ first level of subdirectories of `basedir'."
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 
-;;
 ;; global modes
-;;
+(column-number-mode +1)
+(global-hl-line-mode +1)
+(ido-mode +1)
+(line-number-mode +1)
 
-(column-number-mode t)
-(global-font-lock-mode t)
-(global-hl-line-mode t)
-(ido-mode t)
-(line-number-mode t)
+(setq delete-by-moving-to-trash t)
 
-(scroll-bar-mode -1)
-(tool-bar-mode -1)
+;; always colorize
+(global-font-lock-mode +1)
+(setq font-lock-maximum-decoration t)
 
-;;
-;; editor customizations
-;;
-
-(setq delete-by-moving-to-trash t
-      font-lock-maximum-decoration t)
-
+;; enable backups/autosaves, but isolate them in a separate directory
 (setq backup-directory-alist
       `((".*" . ,msl-backups-dir)))
+
 (setq auto-save-file-name-transforms
       `((".*" ,msl-backups-dir t)))
+
 (setq backup-by-copying t     ; don't clobber symlinks
       delete-old-versions t
       kept-new-versions 5
@@ -127,9 +126,10 @@ first level of subdirectories of `basedir'."
   (windmove-default-keybindings))
 
 (setq custom-file (concat msl-personal-dir "custom.el"))
+(load custom-file)
 
 ;;
-;; cc-mode customizations
+;; prog mode customizations
 ;;
 
 (eval-after-load "cc-mode"
@@ -151,20 +151,12 @@ first level of subdirectories of `basedir'."
 
      (add-hook 'c-mode-hook 'msl/c-mode-hook)))
 
-;;
-;; comint-mode customizations
-;;
-
 (eval-after-load "comint"
   '(progn
      (defun msl/comint-mode-hook () 
        (setq comint-process-echoes t))
 
      (add-hook 'comint-mode-hook 'msl/comint-mode-hook)))
-
-;;
-;; go-mode customizations
-;;
 
 (require 'go-mode-load)
 (eval-after-load "go"
@@ -175,20 +167,12 @@ first level of subdirectories of `basedir'."
 
      (add-hook 'go-mode-hook 'msl/go-mode-hook)))
 
-;;
-;; shell-mode customizations
-;;
-
 (eval-after-load "shell-mode"
   '(progn
      (defun msl/shell-mode-hook ()
        (setq sh-basic-offset 2))
 
      (add-hook 'sh-mode-hook 'msl/shell-mode-hook)))
-
-;;
-;; powershell-mode customizations
-;;
 
 (autoload 'powershell-mode "powershell-mode" "Mode PowerShell" t)
 (push '("\\.ps[12]?$" . powershell-mode) auto-mode-alist)

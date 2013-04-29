@@ -129,6 +129,25 @@ first level of subdirectories of `basedir'."
 (setq custom-file (concat msl-personal-dir "custom.el"))
 (load custom-file)
 
+;; ui customizations
+
+(defun msl/increment-default-font-height (delta)
+  "Adjust the default font height by `delta' on every frame. `delta'
+should be a multiple of 10 to match the units used by the :height
+face attribute."
+  (let* ((new-height (+ (face-attribute 'default :height) delta))
+	 (new-point-height (/ new-height 10)))
+    (set-face-attribute 'default nil :height new-height)
+    (message "Default font size is now %d" new-point-height)))
+
+(defun increase-default-font-height ()
+  (interactive)
+  (msl/increment-default-font-height 10))
+
+(defun decrease-default-font-height ()
+  (interactive)
+  (msl/increment-default-font-height -10))
+
 ;;
 ;; prog mode customizations
 ;;
@@ -145,6 +164,19 @@ first level of subdirectories of `basedir'."
 					(statement-block-intro . +)
 					(statement-case-intro . +)
 					(substatement . +)))
+		    (indent-tabs-mode . nil)))
+
+     (c-add-style "newrelic"
+		  '((c-basic-offset . 2)
+		    (c-cleanup-list . (brace-else-brace
+			               brace-elseif-brace
+				       space-before-funcall))
+		    (c-hanging-braces-alist . ((substatement-open after)))
+		    (c-offsets-alist . ((arglist-cont-nonempty . +)
+					(case-label . +)
+					(label . 0)
+					(statement-case-open . +)
+					(substatement-open . 0)))
 		    (indent-tabs-mode . nil)))
 
      (defun msl/c-mode-hook ()

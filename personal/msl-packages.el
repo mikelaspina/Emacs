@@ -1,6 +1,6 @@
 ;;; -*- mode: emacs-lisp; coding: utf-8; fill-column: 78; -*-
 
-;;; init-packages.el --- Mike LaSpina's dot emacs
+;;; msl-packages.el --- Mike LaSpina's dot emacs
 ;;
 ;; Copyright (c) 2012-2013 Mike LaSpina
 ;;
@@ -32,11 +32,6 @@
 
 (require 'package)
 
-(add-to-list 'package-archives
-	     '("melpa" . "http://melpa.milkbox.net/packages/") t)
-
-(package-initialize)
-
 (defvar msl/packages
   '(clojure-mode
     csharp-mode
@@ -44,6 +39,11 @@
     yaml-mode
     zenburn-theme)
   "A list of packages to ensure are installed at launch.")
+
+(add-to-list 'package-archives
+	     '("melpa" . "http://melpa.milkbox.net/packages/") t)
+
+(package-initialize)
 
 (defun msl/packages-installed-p ()
   (loop for p in msl/packages

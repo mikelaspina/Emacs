@@ -151,7 +151,7 @@ face attribute."
 ;;
 ;; prog mode customizations
 ;;
-
+				 
 (eval-after-load "cc-mode"
   '(progn
      (c-add-style "apache"
@@ -209,6 +209,11 @@ face attribute."
 
 (autoload 'powershell-mode "powershell-mode" "Mode PowerShell" t)
 (push '("\\.ps[12]?$" . powershell-mode) auto-mode-alist)
+
+(add-hook 'prog-mode-hook
+	  (lambda ()
+	    (fci-mode)
+	    (setq fci-rule-column 80)))
 
 ;;
 ;; OS specific customizations

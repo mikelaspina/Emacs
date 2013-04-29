@@ -35,6 +35,7 @@
 (defvar msl/packages
   '(clojure-mode
     csharp-mode
+    fill-column-indicator
     toml-mode
     yaml-mode
     zenburn-theme)

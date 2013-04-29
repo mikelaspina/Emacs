@@ -73,10 +73,11 @@ first level of subdirectories of `basedir'."
 
 ;; packages
 (when (>= emacs-major-version 24)
-  (require 'package)
-  (add-to-list 'package-archives
-	       '("melpa" . "http://melpa.milkbox.net/packages/") t)
-  (package-initialize))
+  (require 'msl-packages))
+
+(when (and (display-graphic-p)
+	   (fboundp 'load-theme))
+  (load-theme 'zenburn t))
 
 ;; minimize annoyances
 (setq visible-bell t)
@@ -186,13 +187,5 @@ first level of subdirectories of `basedir'."
 
 (when (eq system-type 'windows-nt)
   (load-library "windows.el"))
-
-;;
-;; themes
-;;
-
-(when (and (display-graphic-p)
-	   (fboundp 'load-theme))
-  (load-theme 'zenburn t))
 
 ;;; init.el ends here

@@ -122,6 +122,10 @@ first level of subdirectories of `basedir'."
       kept-old-versions 2
       version-control t)      ; use versioned backups
 
+;; Better window movement
+(when (fboundp 'windmove-default-keybindings)
+  (windmove-default-keybindings))
+
 (setq custom-file (concat msl-personal-dir "custom.el"))
 
 ;;

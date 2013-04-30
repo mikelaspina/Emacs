@@ -36,6 +36,7 @@
   '(clojure-mode
     csharp-mode
     fill-column-indicator
+    php-mode
     toml-mode
     yaml-mode
     zenburn-theme)

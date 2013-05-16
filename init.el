@@ -200,12 +200,12 @@ face attribute."
 
      (add-hook 'go-mode-hook 'msl/go-mode-hook)))
 
-(eval-after-load "shell-mode"
+(eval-after-load 'sh-script
   '(progn
-     (defun msl/shell-mode-hook ()
+     (defun msl/sh-mode-hook ()
        (setq sh-basic-offset 2))
 
-     (add-hook 'sh-mode-hook 'msl/shell-mode-hook)))
+     (add-hook 'sh-mode-hook 'msl/sh-mode-hook)))
 
 (autoload 'powershell-mode "powershell-mode" "Mode PowerShell" t)
 (push '("\\.ps[12]?$" . powershell-mode) auto-mode-alist)

@@ -37,6 +37,7 @@
     csharp-mode
     fill-column-indicator
     php-mode
+    solarized-theme
     toml-mode
     yaml-mode
     zenburn-theme)

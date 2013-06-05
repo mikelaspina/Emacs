@@ -32,8 +32,8 @@
 
 ;; hide these immediately
 (setq inhibit-startup-screen t)
-(scroll-bar-mode -1)
-(tool-bar-mode -1)
+(when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+(when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 
 (require 'cl)
 
@@ -71,13 +71,14 @@ first level of subdirectories of `basedir'."
 (add-to-list 'load-path msl-vendor-dir)
 (msl/add-subdirs-to-load-path msl-vendor-dir)
 
+
 ;; packages
 (when (>= emacs-major-version 24)
   (require 'msl-packages))
 
 (when (and (display-graphic-p)
 	   (fboundp 'load-theme))
-  (load-theme 'solarized t))
+  (load-theme 'solarized-light t))
 
 ;; minimize annoyances
 (setq visible-bell t)
@@ -92,10 +93,16 @@ first level of subdirectories of `basedir'."
   (interactive)
   (set-window-width 80))
 
+
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-selection-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
+
 
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
+
 
 ;; global modes
 (column-number-mode +1)
@@ -108,6 +115,7 @@ first level of subdirectories of `basedir'."
 ;; always colorize
 (global-font-lock-mode +1)
 (setq font-lock-maximum-decoration t)
+
 
 ;; enable backups/autosaves, but isolate them in a separate directory
 (setq backup-directory-alist
@@ -122,6 +130,7 @@ first level of subdirectories of `basedir'."
       kept-old-versions 2
       version-control t)      ; use versioned backups
 
+
 ;; Better window movement
 (when (fboundp 'windmove-default-keybindings)
   (windmove-default-keybindings))
@@ -129,10 +138,11 @@ first level of subdirectories of `basedir'."
 (setq custom-file (concat msl-personal-dir "custom.el"))
 (load custom-file)
 
+
 ;; ui customizations
 
 (defun msl/increment-default-font-height (delta)
-  "Adjust the default font height by `delta' on every frame. `delta'
+  "Adjust the default font height by DELTA on every frame. DELTA
 should be a multiple of 10 to match the units used by the :height
 face attribute."
   (let* ((new-height (+ (face-attribute 'default :height) delta))
@@ -148,72 +158,78 @@ face attribute."
   (interactive)
   (msl/increment-default-font-height -10))
 
+(defmacro after (mode &rest body)
+  "`eval-after-load' MODE evaluate BODY."
+  (declare (indent defun))
+  `(eval-after-load ,mode
+     '(progn ,@body)))
+
 ;;
 ;; prog mode customizations
 ;;
-				 
-(eval-after-load "cc-mode"
-  '(progn
-     (c-add-style "apache"
-		  '((c-basic-offset . 4)
-		    (c-offsets-alist . ((brace-list-intro . +)
-					(defun-block-intro . +)
-					(inclass . +)
-					(inextern-lang . 0)
-					(label . 0)
-					(statement-block-intro . +)
-					(statement-case-intro . +)
-					(substatement . +)))
-		    (indent-tabs-mode . nil)))
-
-     (c-add-style "newrelic"
-		  '((c-basic-offset . 2)
-		    (c-cleanup-list . (brace-else-brace
-			               brace-elseif-brace
-				       space-before-funcall))
-		    (c-hanging-braces-alist . ((substatement-open after)))
-		    (c-offsets-alist . ((arglist-cont-nonempty . +)
-					(case-label . +)
-					(label . 0)
-					(statement-case-open . +)
-					(substatement-open . 0)))
-		    (indent-tabs-mode . nil)))
-
-     (defun msl/c-mode-hook ()
-       (c-set-style "apache"))
-
-     (add-hook 'c-mode-hook 'msl/c-mode-hook)))
-
-(eval-after-load "comint"
-  '(progn
-     (defun msl/comint-mode-hook () 
-       (setq comint-process-echoes t))
-
-     (add-hook 'comint-mode-hook 'msl/comint-mode-hook)))
-
-(require 'go-mode-load)
-(eval-after-load "go"
-  '(progn
-     (defun msl/go-mode-hook ()
-       (add-hook 'before-save-hook #'gofmt-before-save)
-       (setq tab-width 2))
-
-     (add-hook 'go-mode-hook 'msl/go-mode-hook)))
-
-(eval-after-load 'sh-script
-  '(progn
-     (defun msl/sh-mode-hook ()
-       (setq sh-basic-offset 2))
-
-     (add-hook 'sh-mode-hook 'msl/sh-mode-hook)))
-
-(autoload 'powershell-mode "powershell-mode" "Mode PowerShell" t)
-(push '("\\.ps[12]?$" . powershell-mode) auto-mode-alist)
 
 (add-hook 'prog-mode-hook
 	  (lambda ()
 	    (fci-mode)
 	    (setq fci-rule-column 80)))
+
+				 
+(after 'cc-mode
+       (c-add-style "apache"
+		    '((c-basic-offset . 4)
+		      (c-offsets-alist . ((brace-list-intro . +)
+					  (defun-block-intro . +)
+					  (inclass . +)
+					  (inextern-lang . 0)
+					  (label . 0)
+					  (statement-block-intro . +)
+					  (statement-case-intro . +)
+					  (substatement . +)))
+		      (indent-tabs-mode . nil)))
+
+       (c-add-style "newrelic"
+		    '((c-basic-offset . 2)
+		      (c-cleanup-list . (brace-else-brace
+					 brace-elseif-brace
+					 space-before-funcall))
+		      (c-hanging-braces-alist . ((substatement-open after)))
+		      (c-offsets-alist . ((arglist-cont-nonempty . +)
+					  (case-label . +)
+					  (label . 0)
+					  (statement-case-open . +)
+					  (substatement-open . 0)))
+		      (indent-tabs-mode . nil)))
+
+       (defun msl/c-mode-hook ()
+	 (c-set-style "apache"))
+
+       (add-hook 'c-mode-hook 'msl/c-mode-hook))
+
+
+(after 'comint
+       (defun msl/comint-mode-hook () 
+	 (setq comint-process-echoes t))
+
+       (add-hook 'comint-mode-hook 'msl/comint-mode-hook))
+
+
+(after 'go-mode
+       (defun msl/go-mode-hook ()
+	 (setq tab-width 2))
+
+       (add-hook 'go-mode-hook 'msl/go-mode-hook))
+
+
+(after 'sh-script
+       (defun msl/sh-mode-hook ()
+	 (setq sh-basic-offset 2))
+       
+       (add-hook 'sh-mode-hook 'msl/sh-mode-hook))
+
+
+(autoload 'powershell-mode "powershell-mode" "Mode PowerShell" t)
+(push '("\\.ps[12]?$" . powershell-mode) auto-mode-alist)
+
 
 ;;
 ;; OS specific customizations

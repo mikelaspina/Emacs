@@ -36,6 +36,7 @@
   '(clojure-mode
     csharp-mode
     fill-column-indicator
+    go-mode
     php-mode
     solarized-theme
     toml-mode

@@ -33,7 +33,8 @@
 (require 'package)
 
 (defvar msl/packages
-  '(clojure-mode
+  '(ag
+    clojure-mode
     csharp-mode
     exec-path-from-shell
     fill-column-indicator

@@ -35,6 +35,7 @@
 (defvar msl/packages
   '(clojure-mode
     csharp-mode
+    exec-path-from-shell
     fill-column-indicator
     go-mode
     php-mode

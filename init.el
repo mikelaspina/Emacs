@@ -83,6 +83,10 @@ first level of subdirectories of `basedir'."
 ;; minimize annoyances
 (setq visible-bell t)
 
+;; Fix environment under Emacs.app.
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))
+
 ;; editor customizations
 (defun set-window-width (n)
   "Set the selected window's width."

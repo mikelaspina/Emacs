@@ -34,4 +34,9 @@
 (setq mac-function-modifier 'control)
 (setq mac-command-modifier 'meta)
 
+;; If we're not running in a terminal, use Menlo 16.
+(when (memq window-system '(mac ns))
+  (add-to-list 'default-frame-alist
+	       '(font . "-apple-Menlo-medium-normal-normal-*-16-*-*-*-m-0-iso10646-1")))
+
 ;;; osx.el ends here

@@ -210,6 +210,7 @@ face attribute."
 		      (c-hanging-braces-alist . ((substatement-open after)))
 		      (c-offsets-alist . ((arglist-cont-nonempty . +)
 					  (case-label . +)
+					  (inextern-lang . 0)
 					  (label . 0)
 					  (statement-case-open . +)
 					  (substatement-open . 0)))

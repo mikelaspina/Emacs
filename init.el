@@ -243,9 +243,16 @@ face attribute."
        (add-hook 'sh-mode-hook 'msl/sh-mode-hook))
 
 
+(after 'ag-mode
+  (defun msl/ag-mode-hook ()
+    (setq ag-reuse-buffers 't))
+
+  (add-hook 'ag-mode-hook 'msl/ag-mode-hook))
+
+
 (autoload 'powershell-mode "powershell-mode" "Mode PowerShell" t)
 (push '("\\.ps[12]?$" . powershell-mode) auto-mode-alist)
-
+(push '("Makefile.real$" . makefile-mode) auto-mode-alist)
 
 ;;
 ;; OS specific customizations

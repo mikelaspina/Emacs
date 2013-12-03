@@ -188,59 +188,59 @@ face attribute."
 	    (fci-mode)
 	    (setq fci-rule-column 80)))
 
-				 
+
 (after 'cc-mode
-       (c-add-style "apache"
-		    '((c-basic-offset . 4)
-		      (c-offsets-alist . ((brace-list-intro . +)
-					  (defun-block-intro . +)
-					  (inclass . +)
-					  (inextern-lang . 0)
-					  (label . 0)
-					  (statement-block-intro . +)
-					  (statement-case-intro . +)
-					  (substatement . +)))
-		      (indent-tabs-mode . nil)))
+  (c-add-style "apache"
+	       '((c-basic-offset . 4)
+		 (c-offsets-alist . ((brace-list-intro . +)
+				     (defun-block-intro . +)
+				     (inclass . +)
+				     (inextern-lang . 0)
+				     (label . 0)
+				     (statement-block-intro . +)
+				     (statement-case-intro . +)
+				     (substatement . +)))
+		 (indent-tabs-mode . nil)))
 
-       (c-add-style "newrelic"
-		    '((c-basic-offset . 2)
-		      (c-cleanup-list . (brace-else-brace
-					 brace-elseif-brace
-					 space-before-funcall))
-		      (c-hanging-braces-alist . ((substatement-open after)))
-		      (c-offsets-alist . ((arglist-cont-nonempty . +)
-					  (case-label . +)
-					  (inextern-lang . 0)
-					  (label . 0)
-					  (statement-case-open . +)
-					  (substatement-open . 0)))
-		      (indent-tabs-mode . nil)))
+  (c-add-style "newrelic"
+	       '((c-basic-offset . 2)
+		 (c-cleanup-list . (brace-else-brace
+				    brace-elseif-brace
+				    space-before-funcall))
+		 (c-hanging-braces-alist . ((substatement-open after)))
+		 (c-offsets-alist . ((arglist-cont-nonempty . +)
+				     (case-label . +)
+				     (inextern-lang . 0)
+				     (label . 0)
+				     (statement-case-open . +)
+				     (substatement-open . 0)))
+		 (indent-tabs-mode . nil)))
 
-       (defun msl/c-mode-hook ()
-	 (c-set-style "apache"))
+  (defun msl/c-mode-hook ()
+    (c-set-style "apache"))
 
-       (add-hook 'c-mode-hook 'msl/c-mode-hook))
+  (add-hook 'c-mode-hook 'msl/c-mode-hook))
 
 
 (after 'comint
-       (defun msl/comint-mode-hook () 
-	 (setq comint-process-echoes t))
+  (defun msl/comint-mode-hook ()
+    (setq comint-process-echoes t))
 
-       (add-hook 'comint-mode-hook 'msl/comint-mode-hook))
+  (add-hook 'comint-mode-hook 'msl/comint-mode-hook))
 
 
 (after 'go-mode
-       (defun msl/go-mode-hook ()
-	 (setq tab-width 2))
+  (defun msl/go-mode-hook ()
+    (setq tab-width 2))
 
-       (add-hook 'go-mode-hook 'msl/go-mode-hook))
+  (add-hook 'go-mode-hook 'msl/go-mode-hook))
 
 
 (after 'sh-script
-       (defun msl/sh-mode-hook ()
-	 (setq sh-basic-offset 2))
-       
-       (add-hook 'sh-mode-hook 'msl/sh-mode-hook))
+  (defun msl/sh-mode-hook ()
+    (setq sh-basic-offset 2))
+
+  (add-hook 'sh-mode-hook 'msl/sh-mode-hook))
 
 
 (after 'ag-mode

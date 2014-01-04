@@ -39,6 +39,9 @@
     exec-path-from-shell
     fill-column-indicator
     go-mode
+    groovy-mode
+    json-mode
+    markdown-mode
     php-mode
     solarized-theme
     toml-mode

@@ -250,6 +250,13 @@ face attribute."
   (add-hook 'ag-mode-hook 'msl/ag-mode-hook))
 
 
+(after 'js
+  (defun msl-js-mode-hook ()
+    (setq js-indent-level 2))
+
+  (add-hook 'js-mode-hook 'msl-js-mode-hook))
+
+
 (autoload 'powershell-mode "powershell-mode" "Mode PowerShell" t)
 (push '("\\.ps[12]?$" . powershell-mode) auto-mode-alist)
 (push '("Makefile.real$" . makefile-mode) auto-mode-alist)

@@ -244,10 +244,8 @@ face attribute."
 
 
 (after 'ag
-  (defun msl-ag-mode-hook ()
-    (setq ag-reuse-buffers 't))
-
-  (add-hook 'ag-mode-hook 'msl-ag-mode-hook))
+  (setq ag-reuse-buffers 't)
+  (setq ag-highlight-search 't))
 
 
 (after 'js

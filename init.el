@@ -255,6 +255,13 @@ face attribute."
   (add-hook 'js-mode-hook 'msl-js-mode-hook))
 
 
+(after 'php-mode
+  (defun msl-php-mode-hook ()
+    (c-set-style "newrelic"))
+
+  (add-hook 'php-mode-hook 'msl-php-mode-hook))
+
+
 (autoload 'powershell-mode "powershell-mode" "Mode PowerShell" t)
 (push '("\\.ps[12]?$" . powershell-mode) auto-mode-alist)
 (push '("Makefile.real$" . makefile-mode) auto-mode-alist)

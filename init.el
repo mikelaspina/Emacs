@@ -78,7 +78,7 @@ first level of subdirectories of `basedir'."
 
 (when (and (display-graphic-p)
 	   (fboundp 'load-theme))
-  (load-theme 'solarized-light t))
+  (load-theme 'solarized-dark t))
 
 ;; minimize annoyances
 (setq visible-bell t)

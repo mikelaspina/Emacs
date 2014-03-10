@@ -39,4 +39,7 @@
   (add-to-list 'default-frame-alist
 	       '(font . "-apple-Menlo-medium-normal-normal-*-16-*-*-*-m-0-iso10646-1")))
 
+;; Fix default directory on 10.9
+(setq default-directory (getenv "HOME"))
+
 ;;; osx.el ends here

@@ -267,6 +267,8 @@ face attribute."
 (push '("Makefile.real$" . makefile-mode) auto-mode-alist)
 (push '("[cC]apfile$" . ruby-mode) auto-mode-alist)
 (push '("Gemfile$" . ruby-mode) auto-mode-alist)
+(push '("Rakefile$" . ruby-mode) auto-mode-alist)
+(push '("\\.rake$" . ruby-mode) auto-mode-alist)
 
 ;;
 ;; OS specific customizations

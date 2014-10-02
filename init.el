@@ -293,7 +293,8 @@ face attribute."
 
 (after 'php-mode
   (defun msl-php-mode-hook ()
-    (c-set-style "newrelic"))
+    (php-enable-psr2-coding-style)
+    (setq c-basic-offset 2))
 
   (add-hook 'php-mode-hook 'msl-php-mode-hook))
 

@@ -262,10 +262,14 @@ face attribute."
 
 
 (after 'go-mode
-  (defun msl/go-mode-hook ()
-    (setq tab-width 2))
+  (defun msl-go-mode-hook ()
+    (setq tab-width 2)
+    (setq gofmt-command "goimports")
+    (company-mode)
+    (yas-minor-mode t)
+    (add-hook 'before-save-hook 'gofmt-before-save))
 
-  (add-hook 'go-mode-hook 'msl/go-mode-hook))
+  (add-hook 'go-mode-hook 'msl-go-mode-hook))
 
 
 (after 'sh-script

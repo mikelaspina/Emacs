@@ -35,6 +35,8 @@
 (defvar msl/packages
   '(ag
     clojure-mode
+    company
+    company-go
     csharp-mode
     exec-path-from-shell
     fill-column-indicator
@@ -46,6 +48,7 @@
     solarized-theme
     toml-mode
     yaml-mode
+    yasnippet
     zenburn-theme)
   "A list of packages to ensure are installed at launch.")
 

@@ -271,9 +271,16 @@ face attribute."
     (setq tab-width 2)
     (setq gofmt-command "goimports")
 
+    ; use go build to compile
+    (if (not (string-match "go" compile-command))
+      (set (make-local-variable 'compile-command) "go build -v"))
+
     ; auto-completion
     (set (make-local-variable 'company-backends) '(company-go))
     (company-mode)
+
+    (local-set-key (kbd "C-c C-b") #'compile)
+
     (yas-minor-mode t)
     (add-hook 'before-save-hook 'gofmt-before-save))
 

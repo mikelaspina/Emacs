@@ -270,6 +270,9 @@ face attribute."
   (defun msl-go-mode-hook ()
     (setq tab-width 2)
     (setq gofmt-command "goimports")
+
+    ; auto-completion
+    (set (make-local-variable 'company-backends) '(company-go))
     (company-mode)
     (yas-minor-mode t)
     (add-hook 'before-save-hook 'gofmt-before-save))

@@ -206,7 +206,7 @@ face attribute."
 (global-set-key (kbd "C-c r")  'rename-file-and-buffer)
 
 
-(add-hook 'after-init-hook (lambda () (yas-global-mode))
+(add-hook 'after-init-hook (lambda () (yas-global-mode)))
 
 (defmacro after (mode &rest body)
   "`eval-after-load' MODE evaluate BODY."

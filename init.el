@@ -114,6 +114,7 @@ first level of subdirectories of `basedir'."
 (global-hl-line-mode +1)
 (ido-mode +1)
 (line-number-mode +1)
+(global-auto-revert-mode +1)
 
 (setq delete-by-moving-to-trash t)
 

@@ -252,10 +252,18 @@ face attribute."
 				     (substatement-open . 0)))
 		 (indent-tabs-mode . nil)))
 
-  (defun msl/c-mode-hook ()
-    (c-set-style "apache"))
+  (defun msl-c-mode-hook ()
+    (c-set-style "apache")
 
-  (add-hook 'c-mode-hook 'msl/c-mode-hook))
+    ; auto-completion
+    (set (make-local-variable 'company-backends)
+	 '(company-irony))
+    (irony-mode)
+    (company-mode)
+
+    (flycheck-mode))
+
+  (add-hook 'c-mode-hook 'msl-c-mode-hook))
 
 
 (after 'comint
@@ -263,6 +271,10 @@ face attribute."
     (setq comint-process-echoes t))
 
   (add-hook 'comint-mode-hook 'msl/comint-mode-hook))
+
+
+(after 'flycheck-mode
+  (add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
 
 
 (after 'go-mode
@@ -288,11 +300,22 @@ face attribute."
   (add-hook 'go-mode-hook 'msl-go-mode-hook))
 
 
+(after 'irony
+  (defun msl-irony-mode-hook ()
+    (irony-cdb-autosetup-compile-options)
+
+    (define-key irony-mode-map [remap completion-at-point]
+      'irony-completion-at-point-async)
+    (define-key irony-mode-map [remap complete-symbol]
+      'irony-completion-at-point-async))
+
+  (add-hook 'irony-mode-hook 'msl-irony-mode-hook))
+
 (after 'sh-script
-  (defun msl/sh-mode-hook ()
+  (defun msl-sh-mode-hook ()
     (setq sh-basic-offset 2))
 
-  (add-hook 'sh-mode-hook 'msl/sh-mode-hook))
+  (add-hook 'sh-mode-hook 'msl-sh-mode-hook))
 
 
 (after 'ag

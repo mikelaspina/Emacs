@@ -7,4 +7,5 @@ auto-save-list
 tramp
 .\#*
 elpa/
+irony/
 ac-comphist.dat

@@ -258,9 +258,9 @@ face attribute."
     (c-set-style "apache")
 
     ; auto-completion
-    (set (make-local-variable 'company-backends)
-	 '(company-irony))
-    (irony-mode)
+    (when (member major-mode '(c-mode c++-mode objc-mode))
+      (set (make-local-variable 'company-backends) '(company-irony))
+      (irony-mode))
     (company-mode)
 
     (flycheck-mode))
@@ -273,6 +273,13 @@ face attribute."
     (setq comint-process-echoes t))
 
   (add-hook 'comint-mode-hook 'msl/comint-mode-hook))
+
+
+(after 'company-mode
+  (defun msl-company-mode-hook ()
+    (setq company-show-numbers t))
+
+  (add-hook 'company-mode-hook 'msl-company-mode-hook))
 
 
 (after 'flycheck-mode

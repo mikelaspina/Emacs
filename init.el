@@ -322,7 +322,8 @@ face attribute."
 
 (after 'sh-script
   (defun msl-sh-mode-hook ()
-    (setq sh-basic-offset 2))
+    (setq sh-basic-offset 2)
+    (flycheck-mode))
 
   (add-hook 'sh-mode-hook 'msl-sh-mode-hook))
 

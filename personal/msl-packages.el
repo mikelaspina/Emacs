@@ -53,7 +53,7 @@
   "A list of packages to ensure are installed at launch.")
 
 (add-to-list 'package-archives
-	     '("melpa" . "http://melpa.milkbox.net/packages/") t)
+	     '("melpa" . "http://melpa.org/packages/") t)
 
 (package-initialize)
 

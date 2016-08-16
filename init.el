@@ -81,7 +81,9 @@ first level of subdirectories of `basedir'."
   (load-theme 'solarized-dark t))
 
 ;; minimize annoyances
-(setq visible-bell t)
+; (setq visible-bell t)
+(setq visible-bell nil) ;; The default
+(setq ring-bell-function 'ignore)
 
 ;; Fix environment under Emacs.app.
 (when (memq window-system '(mac ns))

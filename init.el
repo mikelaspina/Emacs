@@ -290,7 +290,7 @@ face attribute."
   (exec-path-from-shell-copy-env "GOPATH")
 
   (defun msl-go-mode-hook ()
-    (setq tab-width 2)
+    ;(setq tab-width 2)
     (setq gofmt-command "goimports")
 
     ; use go build to compile

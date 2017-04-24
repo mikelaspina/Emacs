@@ -320,6 +320,15 @@ face attribute."
 
   (add-hook 'irony-mode-hook 'msl-irony-mode-hook))
 
+
+(after 'rust-mode
+  (defun msl-rust-mode-hook ()
+    (setq rust-format-on-save t)
+    (flycheck-mode))
+
+  (add-hook 'rust-mode-hook 'msl-rust-mode-hook))
+
+
 (after 'sh-script
   (defun msl-sh-mode-hook ()
     (setq sh-basic-offset 2)

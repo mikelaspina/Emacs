@@ -31,6 +31,13 @@
 ;;; Code:
 
 ;; hide these immediately
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
 (setq inhibit-startup-screen t)
 (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
@@ -154,7 +161,7 @@ first level of subdirectories of `basedir'."
 (when (fboundp 'windmove-default-keybindings)
   (windmove-default-keybindings))
 
-(setq custom-file (concat msl-personal-dir "custom.el"))
+(setq custom-file (concat msl-personal-dir "customize.el"))
 (load custom-file)
 
 
@@ -348,6 +355,11 @@ face attribute."
 
   (add-hook 'js-mode-hook 'msl-js-mode-hook))
 
+(after 'js2
+  (defun msl-js2-mode-hook ()
+    (set-variable 'indent-tabs-mode nil))
+
+  (add-hook 'js2-mode-hook 'msl-js2-mode-hook))
 
 (after 'php-mode
   (defun msl-php-mode-hook ()
@@ -364,6 +376,7 @@ face attribute."
 (push '("Gemfile$" . ruby-mode) auto-mode-alist)
 (push '("Rakefile$" . ruby-mode) auto-mode-alist)
 (push '("\\.rake$" . ruby-mode) auto-mode-alist)
+(push '("\\.js\\'" . js2-mode) auto-mode-alist)
 
 ;;
 ;; OS specific customizations
